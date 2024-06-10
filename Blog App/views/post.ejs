@@ -1,4 +1,7 @@
 <h1><%= data.title %></h1>
+<% if (data.imagePath) { %>
+    <img src="/<%= data.imagePath %>" alt="Post Image">
+  <% } %>
 <article class="article">
  <%= data.body%>
 </article>

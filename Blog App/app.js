@@ -2,6 +2,7 @@ require('dotenv').config();
 
 
 const express = require('express')
+const path = require('path'); 
 const expressLayout = require('express-ejs-layouts')
 const methodOverride = require('method-override')
 const cookieParser = require('cookie-parser')
@@ -11,6 +12,7 @@ const connectDB = require('./server/config/db')
 const app = express()
 const port = 3000 
    connectDB();
+   app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
    app.use(express.urlencoded({ extended: true}));
    app.use(express.json());
