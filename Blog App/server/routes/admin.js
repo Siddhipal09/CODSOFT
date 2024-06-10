@@ -68,17 +68,104 @@ router.post('/admin', async (req, res) => {
   router.get('/dashboard', authMiddleware, async (req, res) => {
 
     try {
-        const data = await Post.find();
+        
         const locals = {
             title: "Dashboard",
             description: "Dashboard"
           };
-        res.render('admin/dashboard', { locals, data})
+          const data = await Post.find();
+        res.render('admin/dashboard', { locals,data,layout: adminLayout})
+        
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+
+  //admin create post
+  router.get('/add-post', authMiddleware, async (req, res) => {
+
+    try {
+        
+        const locals = {
+            title: "Add Post",
+            description: "Blog Post"
+          };
+          const data = await Post.find();
+        res.render('admin/add-post', { locals, data,layout: adminLayout})
 
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
   });
+
+
+  router.post('/add-post', authMiddleware, async (req, res) => {
+
+    try {
+         console.log(req.body)
+
+         try {
+            const newPost = new Post({
+                title: req.body.title,
+                body: req.body.body
+            })
+            await Post.create(newPost);
+            res.redirect('/dashboard');
+         } catch (error) {
+            console.log(error)
+         }
+    } catch (error) {
+        console.log(error)
+    }
+  });
+
+
+  //admin edit post
+  router.put('/edit-post/:id', authMiddleware, async (req, res) => {
+
+    try {
+        
+        await Post.findByIdAndUpdate(req.params.id,{
+          title: req.body.title,
+          body: req.body.body,
+          updatedAt: Date.now()
+        });
+        res.redirect(`/edit-post/${req.params.id}`);
+
+    } catch (error) {
+        console.log(error)
+    }
+  });
+
+
+  router.get('/edit-post/:id', authMiddleware, async (req, res) => {
+
+    try {
+        const locals = {
+        title: "Edit Post",
+        description: "Blog Post"
+        }
+        const data = await Post.findOne({ _id: req.params.id})
+        res.render('admin/edit-post', {
+          locals,data, layout: adminLayout
+        })
+        
+    } catch (error) {
+        console.log(error)
+    }
+  });
+
+
+  //delete
+  router.delete('/delete-post/:id', authMiddleware, async (req, res) => {
+   try {
+     await Post.deleteOne({ _id: req.params.id})
+     res.redirect('/dashboard')
+   } catch (error) {
+    console.log(error)
+   }
+
+  })
   
 //router.post('/admin', async (req, res) => {
 //    try {

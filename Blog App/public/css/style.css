@@ -273,7 +273,7 @@ img{
     color: var(--grey-light);
     border: 0;
     text-decoration: none;
-    font-size: 2px;
+    font-size: 12px;
     padding: 4px 8px;
     line-height: 2;
 }
