@@ -166,6 +166,13 @@ router.post('/admin', async (req, res) => {
    }
 
   })
+
+  //logout
+  router.get('/logout', (req, res) =>{
+    res.clearCookie('token')
+   // res.json({message: 'Logout successfully'});
+    res.redirect('/');
+  });
   
 //router.post('/admin', async (req, res) => {
 //    try {

@@ -144,9 +144,7 @@ img{
 .header_nav ul a:hover{
     text-decoration: underline;
 }
-.header_nav ul a.active{
-    color: var(--grey);
-}
+
 .author{
     padding: 10px 0;
     text-align: center;
