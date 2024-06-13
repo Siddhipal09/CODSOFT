@@ -7,7 +7,7 @@ const Post = require('../models/Post');
 router.get('/', async (req, res) => {
   try {
     const locals = {
-      title: "NodeJs Blog",
+      title: "Blog Town",
       description: "simple blog created with NodeJs, Express & MongoDb."
     };
     const posts = await Post.find({});
