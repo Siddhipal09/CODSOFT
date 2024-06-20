@@ -50,14 +50,14 @@ const AddProject = ({ onSubmit, onCancel }) => {
             className="border rounded w-full py-2 px-3"
           ></textarea>
         </div>
-       
+        <div className='flex justify-between'>
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
           Add Project
         </button>
         <button type="cancel" onClick={handleCancel} className="bg-blue-500 text-white px-4 py-2 rounded">
             Cancel
          </button>
-         
+         </div>
       </form>
     </div>
   );

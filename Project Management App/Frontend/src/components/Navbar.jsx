@@ -23,7 +23,13 @@ const Navbar = () => {
         <button  onClick={handleAddProjectClick} className="bg-white text-blue-500 px-4 py-2 rounded">Add Project</button>
         </div>
     </nav>
-     {isFormVisible && (<AddProject onSubmit={handleFormSubmit} onCancel={handleCancel}/> )}
+     {isFormVisible && (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded shadow-lg">
+      <AddProject onSubmit={handleFormSubmit} onCancel={handleCancel}/>
+      </div>
+      </div>
+       )}
       </>
   )
 }

@@ -11,12 +11,16 @@ exports.getTasks = async (req, res) => {
 
 exports.createTask = async (req, res) => {
    // const task = new Task(req.body);
-   const{title, description, deadline, status} = req.body;
+   const{projectId, title, description, deadline} = req.body;
     try {
-        const newTask = new Task({title, description, deadline, status})
+        const newTask = new Task({ projectId, title, description, deadline})
         const savedTask = await newTask.save();
         res.status(201).json(savedTask);
     } catch (err) {
+        if (err.name === 'ValidationError') {
+            res.status(400).json({ message: err.message });
+        } else{
         res.status(400).json({ message: err.message });
+        }
     }
 };

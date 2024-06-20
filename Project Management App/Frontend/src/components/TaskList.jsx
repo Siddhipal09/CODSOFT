@@ -2,13 +2,24 @@ import React, { useState, useEffect } from 'react';
 
 const TaskList = ({ projectId }) => {
   const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState(null); 
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const res = await fetch(`/api/tasks/${projectId}`);
+      try {
+      const res = await fetch(`http://localhost:3000/api/tasks/${projectId}`);
+      if (!res.ok) {
+        throw new Error('Failed to fetch tasks');
+      }
       const data = await res.json();
       setTasks(data);
-    };
+      setError(null);
+    }catch (error) {
+      console.error('Error fetching tasks:', error);
+      setError(error.message); // Set error message
+      setTasks([]);
+    }
+  }
 
     fetchTasks();
   }, [projectId]);
