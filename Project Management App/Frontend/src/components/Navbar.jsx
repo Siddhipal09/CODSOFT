@@ -1,15 +1,22 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState} from 'react'
 import { Link } from 'react-router-dom';
 import AddProject from './AddProject';
-const Navbar = () => {
+
+const Navbar = ({fetchProjects }) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
+  
+
+  
+
   const handleAddProjectClick = () => {
     setIsFormVisible(true);
   }
-  const handleFormSubmit = (project) => {
-    console.log('New Project:', project);
+  const handleFormSubmit = async() => {
     setIsFormVisible(false);
+    await fetchProjects();
+   
+   
   };
   const handleCancel = () => {
     setIsFormVisible(false); 
@@ -30,6 +37,7 @@ const Navbar = () => {
       </div>
       </div>
        )}
+       
       </>
   )
 }

@@ -5,7 +5,7 @@ const TaskList = ({ projectId }) => {
   const [error, setError] = useState(null); 
   const [editingTaskId, setEditingTaskId] = useState(null);
 
-  useEffect(() => {
+ 
     const fetchTasks = async () => {
       try {
       const res = await fetch(`http://localhost:3000/api/tasks/${projectId}`);
@@ -21,7 +21,7 @@ const TaskList = ({ projectId }) => {
       setTasks([]);
     }
   }
-
+  useEffect(() => {
     fetchTasks();
   }, [projectId]);
 
@@ -33,21 +33,26 @@ const TaskList = ({ projectId }) => {
   const handleCancel = () => {
     setEditingTaskId(null);
   };
-
-
-  const handleTaskUpdated = async () => { 
+   
+  const handleTaskUpdated = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/tasks/${projectId}`);
-      if (!res.ok) {
-        throw new Error('Failed to fetch tasks');
-      }
-      const data = await res.json();
-      setTasks(data);
+      await fetchTasks(); 
       setEditingTaskId(null);
     } catch (error) {
       console.error('Error fetching tasks:', error);
     }
-    
+  };
+
+  
+  const handleDeleteTask = async (taskId) => {
+    try {
+      await fetch(`http://localhost:3000/api/tasks/${taskId}`, {
+        method: 'DELETE',
+      });
+      fetchTasks();
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   };
 
   return (
@@ -70,6 +75,7 @@ const TaskList = ({ projectId }) => {
                 >
                   <img src="/edit.svg" alt="Edit" className="w-6 h-6" /> 
                   </button>
+                  <button onClick={() => handleDeleteTask(task._id)} className="absolute bottom-2 right-2 p-2"><img src="/delete.svg" alt="" className="w-6 h-6"/></button>
             </div>
             {editingTaskId === task._id && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">

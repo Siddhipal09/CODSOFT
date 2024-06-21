@@ -15,9 +15,11 @@ const AddProject = ({ onSubmit, onCancel }) => {
         body: JSON.stringify({ name, description }),
       });
       if (res.ok) {
+        const newProject = await res.json();
         setName('');
         setDescription('');
         alert('Project added successfully');
+        onSubmit(newProject);
       } else {
         throw new Error('Error adding project');
       }

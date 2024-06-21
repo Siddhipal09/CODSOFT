@@ -5,7 +5,7 @@ const TaskList1 = ({ tasks, setTasks }) => {
   const [error, setError] = useState(null); 
   const [editingTaskId, setEditingTaskId] = useState(null);
 
-  useEffect(() => {
+  
     const fetchTasks = async () => {
       try {
       const res = await fetch(`http://localhost:3000/api/tasks`);
@@ -21,7 +21,7 @@ const TaskList1 = ({ tasks, setTasks }) => {
       setTasks([]);
     }
   }
-
+  useEffect(() => {
     fetchTasks();
   }, [setTasks]);
 
@@ -34,21 +34,26 @@ const TaskList1 = ({ tasks, setTasks }) => {
     setEditingTaskId(null);
   };
 
-
-  const handleTaskUpdated = async () => { 
+  const handleTaskUpdated = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/tasks/${projectId}`);
-      if (!res.ok) {
-        throw new Error('Failed to fetch tasks');
-      }
-      const data = await res.json();
-      setTasks(data);
+      await fetchTasks(); 
       setEditingTaskId(null);
     } catch (error) {
       console.error('Error fetching tasks:', error);
     }
-    
   };
+ 
+  const handleDeleteTask = async (taskId) => {
+    try {
+      await fetch(`http://localhost:3000/api/tasks/${taskId}`, {
+        method: 'DELETE',
+      });
+      fetchTasks();
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
+  };
+
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 grid gap-4">
@@ -70,6 +75,7 @@ const TaskList1 = ({ tasks, setTasks }) => {
                 >
                   <img src="/edit.svg" alt="Edit" className="w-6 h-6" /> 
                   </button>
+                  <button onClick={() => handleDeleteTask(task._id)} className="absolute bottom-2 right-2 p-2"><img src="./delete.svg" alt="" /></button>
             </div>
            
                  

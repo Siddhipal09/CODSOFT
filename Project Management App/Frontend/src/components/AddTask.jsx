@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddTask = ({ projectId,onCancel }) => {
+const AddTask = ({ projectId, onSubmit, onCancel }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
@@ -16,10 +16,14 @@ const AddTask = ({ projectId,onCancel }) => {
         body: JSON.stringify({ projectId, title, description, deadline}),
       });
       if (res.ok) {
+        const data = await res.json();
+        onSubmit(data);
         setTitle('');
         setDescription('');
         setDeadline('');
+        onCancel(); 
         alert('Task added successfully');
+        
       } else {
         throw new Error('Error adding task');
       }

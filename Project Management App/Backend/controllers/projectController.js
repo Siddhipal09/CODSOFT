@@ -20,3 +20,11 @@ exports.createProject = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 };
+exports.deleteProject = async (req, res) => {
+    try {
+        await Project.findByIdAndDelete(req.params.projectId);
+        res.status(204).send();
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};

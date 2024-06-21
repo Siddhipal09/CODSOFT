@@ -1,11 +1,17 @@
 import React from 'react'
+import { useEffect } from 'react';
 import ProjectList from '../components/ProjectList';
 
-const Home = () => {
+const Home = ({ projects, fetchProjects }) => {
+  
+  useEffect(() => {
+   
+    fetchProjects();
+  }, [fetchProjects]);
   return (
     <div>
      
-      <ProjectList />
+      <ProjectList projects={projects} fetchProjects={fetchProjects} />
     </div>
   )
 }

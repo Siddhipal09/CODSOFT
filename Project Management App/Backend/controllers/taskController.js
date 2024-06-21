@@ -66,4 +66,14 @@ exports.updateTaskById = async (req, res) => {
       res.status(500).json({ message: err.message });
     }
   };
+
+  exports.deleteTask = async (req, res) => {
+    try {
+       await Task.findByIdAndDelete(req.params.taskId);
+       
+        res.status(204).send();
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
   
