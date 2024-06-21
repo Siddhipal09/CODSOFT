@@ -72,16 +72,13 @@ const TaskList = ({ projectId }) => {
                   </button>
             </div>
             {editingTaskId === task._id && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded shadow-lg">
               <EditTask taskId={task._id} onCancel={handleCancel} onTaskUpdated={handleTaskUpdated} />
+              </div>
+              </div>
             )}
-            <button
-                  onClick={() => handleEditClick(task._id)}
-                  className="absolute top-2 right-2 p-2"
-                 
-                >
-                  <img src="/edit.svg" alt="Edit" className="w-6 h-6" /> 
-                  </button>
-                 
+           
           
           </div>
         ))}
