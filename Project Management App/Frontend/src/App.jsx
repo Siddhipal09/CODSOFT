@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import PendingTasks from './pages/PendingTasks';
 import CompletedTasks from './pages/CompletedTasks';
 import ProjectDetails from './pages/ProjectDetails';
+import InProgress from './pages/InProgress';
 import './App.css'
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/projects/:projectId" element={<ProjectDetails/>} />
             <Route path="/pending-tasks" element={<PendingTasks />} />
             <Route path="/completed-tasks" element={<CompletedTasks />} />
+            <Route path="/in_progress" element={<InProgress />} />
            
           </Routes>
           </div>

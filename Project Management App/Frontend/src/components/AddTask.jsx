@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddTask = ({ projectId }) => {
+const AddTask = ({ projectId,onCancel }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
@@ -27,6 +27,9 @@ const AddTask = ({ projectId }) => {
       console.error('There was an error adding the task!', error);
       alert('Failed to add task. Please try again.');
     }
+  };
+  const handleCancel = () => {
+    onCancel(); 
   };
 
   return (
@@ -60,9 +63,14 @@ const AddTask = ({ projectId }) => {
             className="border rounded w-full py-2 px-3"
           />
         </div>
+        <div className='flex justify-between'>
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
           Add Task
         </button>
+        <button type="cancel" onClick={handleCancel} className="bg-blue-500 text-white px-4 py-2 rounded">
+            Cancel
+         </button>
+         </div>
       </form>
     </div>
   );

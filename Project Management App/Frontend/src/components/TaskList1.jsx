@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import EditTask from '../components/EditTask';
-const TaskList = ({ projectId }) => {
-  const [tasks, setTasks] = useState([]);
+const TaskList1 = ({ tasks, setTasks }) => {
+ // const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null); 
   const [editingTaskId, setEditingTaskId] = useState(null);
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-      const res = await fetch(`http://localhost:3000/api/tasks/${projectId}`);
+      const res = await fetch(`http://localhost:3000/api/tasks`);
       if (!res.ok) {
         throw new Error('Failed to fetch tasks');
       }
@@ -23,7 +23,7 @@ const TaskList = ({ projectId }) => {
   }
 
     fetchTasks();
-  }, [projectId]);
+  }, [setTasks]);
 
   const handleEditClick = (taskId) => {
     setEditingTaskId(taskId);
@@ -91,4 +91,4 @@ const TaskList = ({ projectId }) => {
   );
 };
 
-export default TaskList;
+export default TaskList1;

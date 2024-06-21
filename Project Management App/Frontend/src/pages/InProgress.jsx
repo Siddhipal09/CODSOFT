@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState, useEffect} from 'react';
 import TaskList1 from '../components/TaskList1';
-const PendingTasks = () => {
+const InProgress = () => {
   const [tasks, setTasks] = useState([]);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); 
+  
   useEffect(() => {
     const fetchTasks = async () => {
       try{
@@ -14,14 +15,13 @@ const PendingTasks = () => {
       const data = await res.json();
       console.log('Fetched tasks:', data);
 
-      const pendingTasks = data.filter(task => task.status === 'Pending');
-      console.log('Filtered pending tasks:', pendingTasks);
-        setTasks(pendingTasks);
+      const inprogressTasks = data.filter(task => task.status === 'in_progress');
+      console.log('Filtered inprogress tasks:', inprogressTasks);
+        setTasks(inprogressTasks);
         setError(null);
-    // setTasks(data.filter(task => task.status === 'pending'));
+   // setTasks(data.filter(task => task.status === 'in_progress'));
     }catch (error) {
       console.error('Error fetching tasks:', error);
-      setError(error.message);
       setTasks([]); 
     }
     };
@@ -31,11 +31,10 @@ const PendingTasks = () => {
 
   return (
     <div className="p-4">
-    <h2 className="text-2xl font-bold mb-4">Pending Tasks</h2>
-    {error && <p className="text-red-500">Error: {error}</p>}
+    <h2 className="text-2xl font-bold mb-4">In Progress Tasks</h2>
     <TaskList1 tasks={tasks} setTasks={setTasks} />
   </div>
   )
 }
 
-export default PendingTasks
+export default InProgress
