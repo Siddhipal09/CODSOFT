@@ -5,8 +5,9 @@ const { getTasks,getAllTasks, createTask, updateTaskById, getTaskById, deleteTas
 router.get('/:projectId', getTasks);
 router.get('/', getAllTasks);
 router.post('/', createTask);
-router.put('/:taskId', updateTaskById);
 router.get('/:taskId', getTaskById);
+router.put('/:taskId', updateTaskById);
+
 router.delete('/:taskId', deleteTask);
 
 module.exports = router;

@@ -7,7 +7,7 @@ const ProjectList = ({ projects, fetchProjects }) => {
       await fetch(`http://localhost:3000/api/projects/${projectId}`, {
         method: 'DELETE',
       });
-      fetchProjects(); // Refresh the list of projects
+      fetchProjects(); 
     } catch (error) {
       console.error('Error deleting project:', error);
     }

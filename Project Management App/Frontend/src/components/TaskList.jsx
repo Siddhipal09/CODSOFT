@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import EditTask from '../components/EditTask';
-const TaskList = ({ projectId }) => {
+const TaskList = ({ projectId}) => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null); 
   const [editingTaskId, setEditingTaskId] = useState(null);

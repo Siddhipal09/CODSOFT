@@ -4,26 +4,38 @@ const EditTask = ({ taskId, onCancel,onTaskUpdated }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState('pending');
+
 
   useEffect(() => {
     const fetchTask = async () => {
+      console.log(`Fetching task with ID: ${taskId}`);
       try {
+        
         const res = await fetch(`http://localhost:3000/api/tasks/${taskId}`);
         if (!res.ok) {
           throw new Error('Failed to fetch task');
         }
         const task = await res.json();
-        setTitle(task.title || '');
-        setDescription(task.description || '');
+        console.log('Fetched task:', task);
+        if (!task || !task._id) {
+          throw new Error(`Invalid response received for task with ID ${taskId}`);
+        }
+        
+        setTitle(task.title );
+        setDescription(task.description );
         setDeadline(task.deadline ? task.deadline.split('T')[0] : ''); 
-        setStatus(task.status || 'Pending');
+        setStatus(task.status || 'pending');
       } catch (error) {
         console.error('Error fetching task:', error);
+       
       }
     };
+   
+      fetchTask(); 
+  
 
-    fetchTask();
+   
   }, [taskId]);
 
   const handleSubmit = async (e) => {

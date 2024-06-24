@@ -36,7 +36,7 @@ exports.createTask = async (req, res) => {
 
 exports.updateTaskById = async (req, res) => {
     const { taskId } = req.params;
-    const { title, description, deadline, status } = req.body; // Include status if you want to update it
+    const { title, description, deadline, status } = req.body; 
   
     try {
       const updatedTask = await Task.findByIdAndUpdate(
@@ -57,12 +57,16 @@ exports.updateTaskById = async (req, res) => {
   //getting task by task id
   exports.getTaskById = async (req, res) => {
     try {
-      const task = await Task.findById(req.params.taskId);
+     
+     const task = await Task.findById(req.params.taskId);
       if (!task) {
+        
         return res.status(404).json({ message: 'Task not found' });
       }
+      
       res.json(task);
     } catch (err) {
+      
       res.status(500).json({ message: err.message });
     }
   };
