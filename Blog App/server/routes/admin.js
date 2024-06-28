@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const Post = require('../models/Post');
 const User = require('../models/User');
+const authMiddleware = require('../middleware/authMiddleware')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const adminLayout = '../views/layouts/admin';
@@ -42,21 +43,7 @@ function checkFileType(file, cb) {
 
 
 
-//check login
-const authMiddleware = (req, res, next) => {
-  const token = req.cookies.token;
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-  try {
-    const decoded = jwt.verify(token, jwtSecret);
-    req.userId = decoded.userId;
-    next();
-  } catch (error) {
-    res.status(401).json({ message: 'Unauthorized' })
 
-  }
-}
 
 
 // admin login page
@@ -90,6 +77,8 @@ router.post('/admin', async (req, res) => {
       }
       const token = jwt.sign({ userId: user._id }, jwtSecret);
       res.cookie('token', token, { httpOnly: true });
+
+      
 
       res.redirect('/dashboard');
 
@@ -262,6 +251,8 @@ router.get('/logout', (req, res) => {
   // res.json({message: 'Logout successfully'});
   res.redirect('/');
 });
+
+
 
 //router.post('/admin', async (req, res) => {
 //    try {

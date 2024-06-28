@@ -36,6 +36,7 @@ app.set('view engine','ejs');
 app.use('/',require('./server/routes/main'));
 app.use('/',require('./server/routes/admin'));
 
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const Post = require('../models/Post');
+const authMiddleware = require('../middleware/authMiddleware')
 
 
 // Home route
@@ -22,14 +23,17 @@ router.get('/', async (req, res) => {
 router.get('/post/:id', async (req, res) => {
   
   try{
+    
      let slug = req.params.id;
-
-    const data = await Post.findById({_id: slug});
+     req.session.returnTo = req.originalUrl;
+    const data = await Post.findById({_id: slug}).populate('comments.userId', 'username');
     const locals = {
       title: data.title,
-      description: "simple blog created with NodeJs, Express & MongoDb."
+      description: "simple blog created with NodeJs, Express & MongoDb.",
+    
     }
-    res.render('post', {locals, data});
+    
+   res.render('post', {locals, data});
   }catch(error){
     console.log(error);
   }
@@ -74,6 +78,30 @@ router.post('/search', async (req, res) => {
   } catch (error) {
     console.log(error);
    
+  }
+});
+// Add comment route
+router.post('/posts/:postId/comments', authMiddleware, async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    const newComment = {
+      userId: req.userId,
+      content: req.body.content
+    };
+
+    post.comments.push(newComment);
+    await post.save();
+
+    res.redirect(`/`);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
