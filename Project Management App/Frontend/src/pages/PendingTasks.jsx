@@ -14,7 +14,7 @@ const PendingTasks = () => {
       const data = await res.json();
       console.log('Fetched tasks:', data);
 
-      const pendingTasks = data.filter(task => task.status === 'pending');
+      const pendingTasks = data.filter(task => task.status === 'Pending');
       console.log('Filtered pending tasks:', pendingTasks);
         setTasks(pendingTasks);
         setError(null);
