@@ -17,9 +17,6 @@
 
 body{
     background-color: rgb(240, 244, 244);
-  /*  font-family: "Pacifico", cursive;
-    font-weight: 400;
-    font-style: normal; */
     font-family: "Poppins", sans-serif;
     color: var(--black);
     font-size: var(--font-size-base);
@@ -112,7 +109,6 @@ img{
 }
 .header_button{
     display: flex;
-    grid-area: button;
     justify-content: flex-end;
 }
 .header_button button{
@@ -213,17 +209,6 @@ img{
 .article{
     white-space: pre-wrap;
 }
-.pagination{
-    font-size: 24pxpx;
-    color: var(--grey);
-    text-decoration: none;
-    margin-top: 40px;
-    display: inline-block
-
-}
-.pagination:hover{
-    color: var(--black);
-}
 .footer{
     margin: 3px;
     text-align: center;
@@ -243,7 +228,7 @@ img{
 }
 .searchBar input{
     margin: 0;
-    padding: 0;
+    padding: 10px;
 }
 #searchClose{
     position: absolute;
@@ -251,6 +236,7 @@ img{
     right: 0;
     color: var(--grey-light);
     padding: 15px;
+    cursor: pointer;
 }
 
 .admin-title{
