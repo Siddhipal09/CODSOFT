@@ -25,12 +25,12 @@ router.get('/post/:id', async (req, res) => {
   try{
     
      let slug = req.params.id;
-     req.session.returnTo = req.originalUrl;
+   
     const data = await Post.findById({_id: slug}).populate('comments.userId', 'username');
     const locals = {
       title: data.title,
       description: "simple blog created with NodeJs, Express & MongoDb.",
-    
+      userId: req.userId
     }
     
    res.render('post', {locals, data});
@@ -98,7 +98,7 @@ router.post('/posts/:postId/comments', authMiddleware, async (req, res) => {
     post.comments.push(newComment);
     await post.save();
 
-    res.redirect(`/`);
+    res.redirect(`/post/${postId}`);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });

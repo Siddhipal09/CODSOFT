@@ -77,10 +77,9 @@ router.post('/admin', async (req, res) => {
       }
       const token = jwt.sign({ userId: user._id }, jwtSecret);
       res.cookie('token', token, { httpOnly: true });
-
       
 
-      res.redirect('/dashboard');
+     res.redirect('/');
 
     } catch (error) {
       console.log(error);
@@ -251,6 +250,7 @@ router.get('/logout', (req, res) => {
   // res.json({message: 'Logout successfully'});
   res.redirect('/');
 });
+
 
 
 

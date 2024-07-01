@@ -17,7 +17,11 @@
   <ul>
     <% data.comments.forEach(comment => { %>
       <li>
+        <% if (comment.userId && comment.userId.username) { %>
         <strong><%= comment.userId.username %></strong>: <%= comment.content %>
+        <% } else { %>
+          <strong>Unknown User</strong>: <%= comment.content %>
+        <% } %>
       </li>
     <% }); %>
   </ul>
