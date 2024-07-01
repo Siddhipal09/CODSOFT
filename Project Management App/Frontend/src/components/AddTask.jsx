@@ -4,7 +4,8 @@ const AddTask = ({ projectId, onSubmit, onCancel }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
-  
+  const [assignedTo, setAssignedTo] = useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -13,13 +14,14 @@ const AddTask = ({ projectId, onSubmit, onCancel }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ projectId, title, description, deadline}),
+        body: JSON.stringify({ projectId, title, description, assignedTo, deadline}),
       });
       if (res.ok) {
         const data = await res.json();
         onSubmit(data);
         setTitle('');
         setDescription('');
+        setAssignedTo('');
         setDeadline('');
         onCancel(); 
         alert('Task added successfully');
@@ -55,6 +57,14 @@ const AddTask = ({ projectId, onSubmit, onCancel }) => {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            className="border rounded w-full py-2 px-3"
+          ></textarea>
+        </div>
+        <div className="mb-2">
+          <label className="block mb-1">Assigned To</label>
+          <textarea
+            value={assignedTo}
+            onChange={(e) => setAssignedTo(e.target.value)}
             className="border rounded w-full py-2 px-3"
           ></textarea>
         </div>

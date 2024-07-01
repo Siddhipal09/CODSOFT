@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const EditTask = ({ taskId, onCancel,onTaskUpdated }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [assignedTo, setAssignedTo] = useState('');
   const [deadline, setDeadline] = useState('');
   const [status, setStatus] = useState('pending');
 
@@ -24,6 +25,7 @@ const EditTask = ({ taskId, onCancel,onTaskUpdated }) => {
         
         setTitle(task.title );
         setDescription(task.description );
+        setAssignedTo(task.assignedTo );
         setDeadline(task.deadline ? task.deadline.split('T')[0] : ''); 
         setStatus(task.status || 'pending');
       } catch (error) {
@@ -46,7 +48,7 @@ const EditTask = ({ taskId, onCancel,onTaskUpdated }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, description, deadline, status }),
+        body: JSON.stringify({ title, description, assignedTo, deadline, status }),
       });
       if (res.ok) {
         alert('Task updated successfully');
@@ -87,6 +89,14 @@ const EditTask = ({ taskId, onCancel,onTaskUpdated }) => {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            className="border rounded w-full py-2 px-3"
+          ></textarea>
+        </div>
+        <div className="mb-2">
+          <label className="block mb-1">Assigned To</label>
+          <textarea
+            value={assignedTo}
+            onChange={(e) => setAssignedTo(e.target.value)}
             className="border rounded w-full py-2 px-3"
           ></textarea>
         </div>

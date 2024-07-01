@@ -66,6 +66,7 @@ const TaskList1 = ({ tasks, setTasks }) => {
              <div className="p-4">
             <h2 className="text-xl font-bold text-blue-500">{task.title}</h2>
             <p className="text-gray-700 mt-2">{task.description}</p>
+            <p className="text-gray-500 mt-2">Assigned To: {task.assignedTo}</p>
             <p className="text-gray-500 mt-2">Deadline: {new Date(task.deadline).toLocaleDateString()}</p>
             <p className="text-gray-500 mt-2">Status: {task.status}</p>
             <button
@@ -75,7 +76,7 @@ const TaskList1 = ({ tasks, setTasks }) => {
                 >
                   <img src="/edit.svg" alt="Edit" className="w-6 h-6" /> 
                   </button>
-                  <button onClick={() => handleDeleteTask(task._id)} className="absolute bottom-2 right-2 p-2"><img src="./delete.svg" alt="" /></button>
+                  <button onClick={() => handleDeleteTask(task._id)} className="absolute bottom-2 right-2 p-2"><img src="./delete.svg" className="w-6 h-6" /></button>
             </div>
            
                  

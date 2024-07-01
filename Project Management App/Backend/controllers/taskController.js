@@ -20,9 +20,9 @@ exports.getAllTasks = async (req, res) => {
 
 exports.createTask = async (req, res) => {
    // const task = new Task(req.body);
-   const{projectId, title, description, deadline} = req.body;
+   const{projectId, title, description, assignedTo, deadline} = req.body;
     try {
-        const newTask = new Task({ projectId, title, description, deadline})
+        const newTask = new Task({ projectId, title, description,assignedTo, deadline})
         const savedTask = await newTask.save();
         res.status(201).json(savedTask);
     } catch (err) {
@@ -36,12 +36,12 @@ exports.createTask = async (req, res) => {
 
 exports.updateTaskById = async (req, res) => {
     const { taskId } = req.params;
-    const { title, description, deadline, status } = req.body; 
+    const { title, description, assignedTo, deadline, status } = req.body; 
   
     try {
       const updatedTask = await Task.findByIdAndUpdate(
         taskId,
-        { title, description, deadline, status },
+        { title, description, assignedTo, deadline, status },
         { new: true }
       );
   

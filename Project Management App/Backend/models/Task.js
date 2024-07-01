@@ -4,6 +4,7 @@ const taskSchema = new mongoose.Schema({
     projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Project', required: true },
     title: { type: String, required: true },
     description: { type: String},
+    assignedTo: { type: String},
     deadline: { type: Date},
     status: { type: String, default: 'Pending' },
     createdAt: { type: Date, default: Date.now }

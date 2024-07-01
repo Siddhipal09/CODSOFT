@@ -66,6 +66,7 @@ const TaskList = ({ projectId}) => {
              <div className="p-4">
             <h2 className="text-xl font-bold text-blue-500">{task.title}</h2>
             <p className="text-gray-700 mt-2">{task.description}</p>
+            <p className="text-gray-500 mt-2">Assigned To: {task.assignedTo}</p>
             <p className="text-gray-500 mt-2">Deadline: {new Date(task.deadline).toLocaleDateString()}</p>
             <p className="text-gray-500 mt-2">Status: {task.status}</p>
             <button
