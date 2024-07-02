@@ -17,7 +17,7 @@ function App() {
    
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/projects'); 
+        const response = await fetch('https://codsoft-sk3w.onrender.com/api/projects'); 
         if (response.ok) {
           const data = await response.json();
           setProjects(data); 

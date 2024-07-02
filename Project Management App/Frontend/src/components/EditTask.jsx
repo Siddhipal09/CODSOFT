@@ -13,7 +13,7 @@ const EditTask = ({ taskId, onCancel,onTaskUpdated }) => {
       console.log(`Fetching task with ID: ${taskId}`);
       try {
         
-        const res = await fetch(`http://localhost:3000/api/tasks/${taskId}`);
+        const res = await fetch(`https://codsoft-sk3w.onrender.com/api/tasks/${taskId}`);
         if (!res.ok) {
           throw new Error('Failed to fetch task');
         }

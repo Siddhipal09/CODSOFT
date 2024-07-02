@@ -9,7 +9,7 @@ const AddTask = ({ projectId, onSubmit, onCancel }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:3000/api/tasks', {
+      const res = await fetch('https://codsoft-sk3w.onrender.com/api/tasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

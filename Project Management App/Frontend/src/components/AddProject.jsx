@@ -7,7 +7,7 @@ const AddProject = ({ onSubmit, onCancel }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:3000/api/projects', {
+      const res = await fetch('https://codsoft-sk3w.onrender.com/api/projects', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

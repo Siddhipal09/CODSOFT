@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const ProjectList = ({ projects, fetchProjects }) => {
   const handleDelete = async (projectId) => {
     try {
-      await fetch(`http://localhost:3000/api/projects/${projectId}`, {
+      await fetch(`https://codsoft-sk3w.onrender.com/api/projects/${projectId}`, {
         method: 'DELETE',
       });
       fetchProjects(); 

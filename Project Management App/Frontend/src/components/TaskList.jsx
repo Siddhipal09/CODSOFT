@@ -8,7 +8,7 @@ const TaskList = ({ projectId}) => {
  
     const fetchTasks = async () => {
       try {
-      const res = await fetch(`http://localhost:3000/api/tasks/${projectId}`);
+      const res = await fetch(`https://codsoft-sk3w.onrender.com/api/tasks/${projectId}`);
       if (!res.ok) {
         throw new Error('Failed to fetch tasks');
       }
