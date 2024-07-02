@@ -45,7 +45,7 @@ const TaskList1 = ({ tasks, setTasks }) => {
  
   const handleDeleteTask = async (taskId) => {
     try {
-      await fetch(`http://localhost:3000/api/tasks/${taskId}`, {
+      await fetch(`https://codsoft-sk3w.onrender.com/api/tasks/${taskId}`, {
         method: 'DELETE',
       });
       fetchTasks();
