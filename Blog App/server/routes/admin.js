@@ -79,7 +79,7 @@ router.post('/admin', async (req, res) => {
       res.cookie('token', token, { httpOnly: true });
       
 
-     res.redirect('/');
+     res.redirect('/dashboard');
 
     } catch (error) {
       console.log(error);
@@ -177,23 +177,7 @@ router.post('/add-post', authMiddleware, async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
   });
-//  try {
-//    console.log(req.body)
-//
-//    try {
-//      const newPost = new Post({
-//        title: req.body.title,
-//        body: req.body.body,
- //       imagePath: req.file.path
- //     })
- //     await Post.create(newPost);
- //     res.redirect('/dashboard');
- //   } catch (error) {
- //     console.log(error)
- //   }
- // } catch (error) {
- //   console.log(error)
- // }
+
 });
 
 
@@ -254,22 +238,6 @@ router.get('/logout', (req, res) => {
 
 
 
-//router.post('/admin', async (req, res) => {
-//    try {
-//       const{username, password} = req.body;
-//       console.log(req.body)
-//       if(req.body.username === 'admin' && req.body.password === 'password'){
-//        res.send('You are logged in.')
-//       }else{
-//        res.send('Wrong username or password')
-//       }
-//      
-//      
-//    } catch (error) {
-//      console.log(error);
-//     
-//    }
-//  });
 
 
 

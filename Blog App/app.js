@@ -10,7 +10,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const connectDB = require('./server/config/db')
 const app = express()
-const port = 3000 
+ 
    connectDB();
    app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -36,7 +36,7 @@ app.set('view engine','ejs');
 app.use('/',require('./server/routes/main'));
 app.use('/',require('./server/routes/admin'));
 
-
+const port = process.env.PORT || 3000
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
