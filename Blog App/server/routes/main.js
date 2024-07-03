@@ -108,20 +108,3 @@ router.post('/posts/:postId/comments', authMiddleware, async (req, res) => {
 
 
 
-//function insertPostData () {
-//  Post.insertMany([
-//    {
-//      title: "Building a blog",
-//      body: "This is the body text"
-//    },
-//    {
-//      title: "Building a blog2",
-//      body: "This is the body text2"
-//    },
-//    {
-//      title: "Building a blog3",
-//      body: "This is the body text3"
-//    },
-//  ])
-//}
-//insertPostData();
